@@ -1,0 +1,7 @@
+{
+    // 이 파일은 Babel이 JavaScript 파일을 어떻게 변환할지 지정합니다.
+    // 이 설정 파일은 Babel에게 React 코드 (JSX 포함)와 최신 JavaScript 코드를 
+    // 일반 JavaScript로 변환하도록 지시합니다.
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+  }
+  

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= member.name %></title>
+    <!-- 부트스트랩 CSS 링크 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .detail-view-container {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .detail-view-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .detail-label {
+            font-weight: bold;
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+        }
+        .detail-content {
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+        }
+        .detail-row:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="detail-view-header text-center mt-4">
+            회원 상세 정보
+        </div>
+        <div class="detail-view-container">
+            <div class="row detail-row">
+                <div class="col-md-2 detail-label">ID</div>
+                <div class="col-md-10 detail-content"><%= member.id %></div>
+            </div>
+            <div class="row detail-row">
+                <div class="col-md-2 detail-label">이름</div>
+                <div class="col-md-10 detail-content"><%= member.name %></div>
+            </div>
+            <div class="row detail-row">
+                <div class="col-md-2 detail-label">이메일</div>
+                <div class="col-md-10 detail-content"><%= member.email %></div>
+            </div>
+            <div class="row detail-row">
+                <div class="col-md-2 detail-label">전화번호</div>
+                <div class="col-md-10 detail-content"><%= member.phone %></div>
+            </div>
+            <div class="row detail-row">
+                <div class="col-md-2 detail-label">등록일</div>
+                <div class="col-md-10 detail-content"><%= member.regdate.toISOString().split('T')[0] %></div>
+            </div>
+            <div class="row detail-row">
+                <div class="col-md-2 detail-label">수정일</div>
+                <div class="col-md-10 detail-content"><%= member.moddate.toISOString().split('T')[0] %></div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/member/<%= member.id %>/edit" class="btn btn-primary">수정</a>
+            <form action="/member/<%= member.id %>/delete" method="post" 
+                onsubmit="return confirm('게시물을 삭제하시겠습니까?');" class="d-inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="btn btn-danger">삭제</button>
+            </form>
+            <a href="/member/list" class="btn btn-secondary">목록</a>
+        </div>
+    </div>
+    <!-- 부트스트랩 JS와 Popper.js 추가 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

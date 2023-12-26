@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 목록</title>
+    <!-- 부트스트랩 CSS 링크 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .list-view-container {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .list-view-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .board-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .board-list th, .board-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .board-list th {
+            background-color: #f2f2f2;
+        }
+        .board-list tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="list-view-header text-center mt-4">
+            게시물 목록
+        </div>
+        <div class="list-view-container">
+            <table class="board-list table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">등록일</th>
+                        <th scope="col">수정일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% posts.forEach(function(post) { %>
+                        <tr>
+                            <td scope="row"><%= post.bno %></td>
+                            <td><a href="/board/<%= post.bno %>/read"><%= post.title %></a></td>
+                            <td><%= post.writer %></td>
+                            <td><%= post.regdate.toISOString().substring(0, 10) %></td>
+                            <td><%= post.moddate.toISOString().substring(0, 10) %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+         <!-- 목록 하단에 게시물 등록 버튼을 추가 -->
+         <div class="text-center mt-4">
+            <a href="/board/register" class="btn btn-primary">등록</a>
+        </div>
+    </div> <!-- end container -->
+    <!-- 부트스트랩 JS와 Popper.js 추가 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
